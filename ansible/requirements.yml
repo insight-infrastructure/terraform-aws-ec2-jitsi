@@ -1,0 +1,13 @@
+roles:
+  - src: cloudalchemy.node-exporter
+    version: 0.19.0
+  - src: freedomofpress.jitsi-meet
+    version: 73fcc664a198344cf315aaea3f59e5d99c7efe37
+  - src: thefinn93.letsencrypt
+    version: f4b5687073a20e2a744115e97fa87ef278e4b2bf
+
+  - src: geerlingguy.certbot
+    version: 3.0.3
+
+  - src: https://github.com/UdelaRInterior/ansible-role-jitsi-meet
+    name: UdelaRInterior.jitsi-meet

@@ -1,0 +1,22 @@
+- name: Configure jitsi-meet server.
+  hosts: all
+  vars:
+    # Change this to match the DNS entry for your host IP.
+#    jitsi_meet_server_name: insight-infra.de
+  roles:
+    - common
+    - { role: "cloudalchemy.node-exporter", when: (node_exporter | default(false) ) }
+    - role: geerlingguy.certbot
+      become: yes
+      certbot_create_if_missing: true
+      certbot_admin_email: "webmaster@{{ jitsi_meet_server_name }}"
+      certbot_certs:
+        - domains:
+            - "{{ jitsi_meet_server_name }}"
+      certbot_create_standalone_stop_services: []
+
+    - role: UdelaRInterior.jitsi-meet
+      jitsi_meet_ssl_cert_path: "/etc/letsencrypt/live/{{ jitsi_meet_server_name }}/fullchain.pem"
+      jitsi_meet_ssl_key_path: "/etc/letsencrypt/live/{{ jitsi_meet_server_name }}/privkey.pem"
+      become: yes
+      tags: jitsi
