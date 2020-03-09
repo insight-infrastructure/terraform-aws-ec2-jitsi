@@ -5,7 +5,8 @@
 
 ## Features
 
-This module...
+This module deploys a Jitsi server on an ec2. Configuration is done with ansible. Specify an hostname and domain name to
+get `A` records populated.
 
 ## Terraform Versions
 
@@ -15,8 +16,16 @@ For Terraform v0.12.0+
 
 ```
 module "this" {
-    source = "github.com/robc-io/terraform-aws-ec2-jitsi"
+  source = "github.com/robc-io/terraform-aws-ec2-jitsi"
+  subnet_id = module.vpc.public_subnets[0]
 
+  vpc_security_group_ids = [
+  aws_security_group.this.id]
+
+  public_key_path  = var.public_key_path
+  private_key_path = var.private_key_path
+
+  root_domain_name = var.root_domain_name
 }
 ```
 ## Examples
