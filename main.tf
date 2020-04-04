@@ -78,7 +78,7 @@ resource "aws_instance" "this" {
 
 module "ansible" {
   source = "github.com/insight-infrastructure/terraform-aws-ansible-playbook.git?ref=v0.9.0"
-  ip     = var.create_spot ? join("", aws_spot_instance_request.this.*.public_ip) : join("", aws_instance.this.public_ip)
+  ip     = var.create_spot ? join("", aws_spot_instance_request.this.*.public_ip) : join("", aws_instance.this.*.public_ip)
   //  ip               = aws_spot_instance_request.this.public_ip
   user             = "ubuntu"
   private_key_path = var.private_key_path
@@ -98,5 +98,5 @@ resource "aws_route53_record" "this" {
   name    = local.fqdn
   type    = "A"
   ttl     = "300"
-  records = [var.create_spot ? join("", aws_spot_instance_request.this.*.public_ip) : join("", aws_instance.this.public_ip)]
+  records = [var.create_spot ? join("", aws_spot_instance_request.this.*.public_ip) : join("", aws_instance.this.*.public_ip)]
 }
