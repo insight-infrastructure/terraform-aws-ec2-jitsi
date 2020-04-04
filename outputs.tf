@@ -7,5 +7,5 @@ output "instance_id" {
 }
 
 output "key_name" {
-  value = aws_key_pair.this.*.key_name[0]
+  value = aws_key_pair.this.key_name
 }
