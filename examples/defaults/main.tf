@@ -30,7 +30,15 @@ resource "aws_security_group" "this" {
 
   ingress {
     from_port = 5347
-    protocol  = "-1"
+    protocol  = "udp"
+    to_port   = 5347
+    cidr_blocks = [
+    "0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 5347
+    protocol  = "tcp"
     to_port   = 5347
     cidr_blocks = [
     "0.0.0.0/0"]
