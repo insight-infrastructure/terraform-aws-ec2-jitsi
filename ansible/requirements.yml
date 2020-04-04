@@ -11,3 +11,4 @@ roles:
 
   - src: https://github.com/UdelaRInterior/ansible-role-jitsi-meet
     name: UdelaRInterior.jitsi-meet
+    version: c788157e87e4f5b866d1b7c09e92f052e00c3e44
