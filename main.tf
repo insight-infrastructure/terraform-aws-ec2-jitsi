@@ -30,7 +30,7 @@ resource "aws_eip" "this" {
 }
 
 resource "aws_eip_association" "this" {
-  instance_id = aws_instance.this.id
+  instance_id = aws_spot_instance_request.this.id
   public_ip   = aws_eip.this.public_ip
 }
 
