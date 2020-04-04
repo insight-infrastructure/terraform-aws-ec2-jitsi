@@ -67,5 +67,3 @@ module "ansible" {
 
   requirements_file_path = "${path.module}/ansible/requirements.yml"
 }
-
-

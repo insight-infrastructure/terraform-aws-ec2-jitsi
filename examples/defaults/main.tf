@@ -1,22 +1,9 @@
-module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-  name   = "default"
-
-  cidr = "10.0.0.0/16"
-
-  azs = [
-  "${var.aws_region}a"]
-  private_subnets = [
-  "10.0.1.0/24"]
-  public_subnets = [
-  "10.0.101.0/24"]
-
-  enable_nat_gateway = false
-  enable_vpn_gateway = false
+module "vpc_default" {
+  source = "github.com/insight-infrastructure/terraform-aws-default-vpc.git?ref=v0.1.0"
 }
 
 resource "aws_security_group" "this" {
-  vpc_id = module.vpc.vpc_id
+  vpc_id = module.vpc_default.vpc_id
 
   dynamic "ingress" {
     for_each = [
@@ -43,7 +30,7 @@ resource "aws_security_group" "this" {
 
 module "defaults" {
   source    = "../.."
-  subnet_id = module.vpc.public_subnets[0]
+  subnet_id = module.vpc_default.subnet_ids[0]
 
   vpc_security_group_ids = [
   aws_security_group.this.id]
