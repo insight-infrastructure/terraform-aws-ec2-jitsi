@@ -8,6 +8,7 @@
 .terraform/
 .terraform.tfstate.lock.info
 
+terraform.tfvars
 
 .terraform.tfvars
 
