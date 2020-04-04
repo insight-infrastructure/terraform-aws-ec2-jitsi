@@ -30,13 +30,34 @@ resource "aws_key_pair" "this" {
   tags       = module.label.tags
 }
 
-resource "aws_spot_instance_request" "this" {
+//resource "aws_spot_instance_request" "this" {
+//  ami           = module.ami.ubuntu_1804_ami_id
+//  instance_type = var.instance_type
+//
+//  spot_price           = "1"
+//  spot_type            = "persistent"
+//  wait_for_fulfillment = true
+//
+//  root_block_device {
+//    volume_size = var.root_volume_size
+//  }
+//
+//  subnet_id              = var.subnet_id
+//  vpc_security_group_ids = var.vpc_security_group_ids
+//
+//  key_name = aws_key_pair.this.key_name
+//
+//  tags = module.label.tags
+//}
+
+
+resource "aws_instance" "this" {
   ami           = module.ami.ubuntu_1804_ami_id
   instance_type = var.instance_type
 
-  spot_price           = "1"
-  spot_type            = "persistent"
-  wait_for_fulfillment = true
+  //  spot_price           = "1"
+  //  spot_type            = "persistent"
+  //  wait_for_fulfillment = true
 
   root_block_device {
     volume_size = var.root_volume_size
@@ -52,8 +73,8 @@ resource "aws_spot_instance_request" "this" {
 
 module "ansible" {
   source = "github.com/insight-infrastructure/terraform-aws-ansible-playbook.git?ref=v0.9.0"
-  //  ip               = aws_eip_association.this.public_ip
-  ip               = aws_spot_instance_request.this.public_ip
+  ip     = aws_instance.this.public_ip
+  //  ip               = aws_spot_instance_request.this.public_ip
   user             = "ubuntu"
   private_key_path = var.private_key_path
 
@@ -72,6 +93,9 @@ resource "aws_route53_record" "this" {
   name    = local.fqdn
   type    = "A"
   ttl     = "300"
+  //  records = [
+  //  aws_spot_instance_request.this.public_ip]
   records = [
-  aws_spot_instance_request.this.public_ip]
+  aws_instance.this.public_ip]
+
 }
