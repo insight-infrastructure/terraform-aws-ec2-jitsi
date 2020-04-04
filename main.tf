@@ -40,9 +40,11 @@ resource "aws_key_pair" "this" {
   tags       = module.label.tags
 }
 
-resource "aws_instance" "this" {
+resource "aws_spot_instance_request" "this" {
   ami           = module.ami.ubuntu_1804_ami_id
   instance_type = var.instance_type
+
+  spot_price = "1"
 
   root_block_device {
     volume_size = var.root_volume_size
