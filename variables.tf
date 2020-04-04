@@ -1,3 +1,9 @@
+variable "create_spot" {
+  description = "Bool for spot pricing"
+  type        = bool
+  default     = true
+}
+
 #####
 # DNS
 #####

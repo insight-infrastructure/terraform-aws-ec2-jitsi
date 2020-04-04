@@ -47,6 +47,7 @@ No issue is creating limit on this module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
+| create\_spot | Bool for spot pricing | `bool` | `true` | no |
 | eip\_id | The elastic ip id to attach to active instance | `string` | `""` | no |
 | environment | The environment | `string` | `""` | no |
 | hostname | The hostname if creating dns record - hostname.example.com | `string` | `"jitsi"` | no |
