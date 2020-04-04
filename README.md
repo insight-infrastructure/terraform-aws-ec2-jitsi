@@ -70,7 +70,6 @@ No issue is creating limit on this module.
 | Name | Description |
 |------|-------------|
 | instance\_id | n/a |
-| key\_name | n/a |
 | public\_ip | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

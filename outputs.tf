@@ -6,6 +6,3 @@ output "instance_id" {
   value = aws_spot_instance_request.this.id
 }
 
-output "key_name" {
-  value = aws_key_pair.this.key_name
-}
